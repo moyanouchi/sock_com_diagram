@@ -1,0 +1,17 @@
+title Sock.Comm. (Client)
+
+client->*screen: input() * 2
+screen-->client: input str, ipaddr
+
+client->*message: gen_msg_from(input str)
+message-->client: formatted msg
+
+client->*tranceiver: send(formatted msg, ipaddr)
+tranceiver->*naming service: name resolve(ipaddr)
+
+naming service->*property: get sockaddr list(), sock list()
+property-->naming service: sockaddr list, sock list
+
+naming service-->tranceiver: sock
+
+tranceiver-->client: send response
